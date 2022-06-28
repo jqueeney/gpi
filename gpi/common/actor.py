@@ -2,8 +2,8 @@ import gym
 import numpy as np
 import tensorflow as tf
 
-from geppo.common.ac_utils import transform_features, create_nn 
-from geppo.common.ac_utils import flat_to_list, list_to_flat
+from gpi.common.ac_utils import transform_features, create_nn 
+from gpi.common.ac_utils import flat_to_list, list_to_flat
 
 class Actor:
     """Base policy class."""
@@ -132,7 +132,7 @@ class GaussianActor(Actor):
             # Stores most recent starting policy pi_k
             self._nn_pik = create_nn(self.s_dim,self.a_dim,layers,activations,
                 gain,name='actor_mean_pik')
-            self.logstd_pik = tf.Variable(np.ones_like(self.logstd_init),
+            self.logstd_pik = tf.Variable(np.zeros_like(self.logstd_init),
                 dtype=tf.float32,name='logstd_pik')
 
         self.update_pik_weights()

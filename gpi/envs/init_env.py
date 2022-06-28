@@ -1,5 +1,5 @@
 """Interface to all environment files."""
-from geppo.envs.wrappers.normalize_wrapper import NormEnv
+from gpi.envs.wrappers.normalize_wrapper import NormEnv
 
 def init_env(env_type,env_name,task_name,
     s_normalize,r_normalize,s_t,s_mean,s_var,r_t,r_mean,r_var):
@@ -19,10 +19,10 @@ def init_env(env_type,env_name,task_name,
     """
 
     if env_type == 'gym':
-        from geppo.envs.wrappers.gym_wrapper import make_gym_env
+        from gpi.envs.wrappers.gym_wrapper import make_gym_env
         env_raw = make_gym_env(env_name)
     elif env_type == 'dmc':
-        from geppo.envs.wrappers.dmc_wrapper import make_dmc_env
+        from gpi.envs.wrappers.dmc_wrapper import make_dmc_env
         env_raw = make_dmc_env(env_name,task_name)
     else:
         raise ValueError('Only gym and dmc env_type supported')

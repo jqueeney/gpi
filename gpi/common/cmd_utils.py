@@ -158,11 +158,12 @@ parser.add_argument('--no_op_batches',help='number of no op batches',type=int)
 # Actor and critic kwargs
 #########################################
 
-ac_kwargs = [
+# Shared
+# ---------------------------
+
+ac_kwargs_shared = [
     'critic_lr','adv_center','adv_scale','adv_clip','update_it','nminibatch',
-    'eps_ppo','eps_vary',
-    'actor_lr','scaleinitlr_eps','scaleinitlr_dim','max_grad_norm','adapt_lr',
-    'adapt_factor','adapt_minthresh','adapt_maxthresh','early_stop'
+    'eps_ppo','eps_vary'
 ]
 
 parser.add_argument('--critic_lr',
@@ -185,6 +186,14 @@ parser.add_argument('--eps_ppo',help='PPO clipping parameter',
 parser.add_argument('--eps_vary',
     help='vary one-step param based on penalty term calc',action='store_true')
 
+# GePPO actor kwargs
+# ---------------------------
+
+ac_kwargs_geppo = [
+    'actor_lr','scaleinitlr_eps','scaleinitlr_dim','max_grad_norm','adapt_lr',
+    'adapt_factor','adapt_minthresh','adapt_maxthresh','early_stop'
+]
+
 parser.add_argument('--actor_lr',help='actor learning rate',
     type=float,default=3e-4)
 parser.add_argument('--scaleinitlr_eps',
@@ -206,6 +215,27 @@ parser.add_argument('--adapt_maxthresh',
 
 parser.add_argument('--early_stop',help='PPO early stopping',
     action='store_true')
+
+# GeTRPO / GeVMPO actor kwargs
+# ---------------------------
+
+ac_kwargs_getrpo = [
+    'cg_it','trust_sub','kl_maxfactor','trust_damp'
+]
+
+parser.add_argument('--cg_it',help='conjugate gradient iterations',
+    type=int,default=20)
+parser.add_argument('--trust_sub',help='trust region subsampling factor',
+    type=int,default=1)
+parser.add_argument('--kl_maxfactor',
+    help='KL mult factor for backtracking line search',type=float,default=1.5)
+parser.add_argument('--trust_damp',help='trust region damping coefficient',
+    type=float,default=0.01)
+
+# Combined
+# ---------------------------
+
+ac_kwargs = ac_kwargs_shared + ac_kwargs_geppo + ac_kwargs_getrpo
 
 # For export to run.py
 #########################################

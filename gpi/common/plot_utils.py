@@ -14,8 +14,8 @@ plot_parser = argparse.ArgumentParser()
 
 plot_parser.add_argument('--import_path',help='import path',
     type=str,default='./logs')
-plot_parser.add_argument('--ppo_file',help='file with PPO data',type=str)
-plot_parser.add_argument('--geppo_file',help='file with GePPO data',type=str)
+plot_parser.add_argument('--on_file',help='file with on-policy data',type=str)
+plot_parser.add_argument('--gpi_file',help='file with GPI data',type=str)
 plot_parser.add_argument('--save_path',help='save path',
     type=str,default='./figs')
 plot_parser.add_argument('--save_name',
@@ -89,39 +89,39 @@ def open_and_aggregate(filepath,filename,x,window,metric):
     
     return results
 
-def plot_compare(ppo_data,geppo_data,x,se_val,save_path,save_name):
+def plot_compare(on_data,gpi_data,x,se_val,save_path,save_name):
     """Creates and saves plot."""
     
     fig, ax = plt.subplots()
 
-    ppo_color = 'C0'
-    geppo_color = 'C1'
+    on_color = 'C0'
+    gpi_color = 'C1'
 
-    if ppo_data is not None:
-        ppo_mean = np.mean(ppo_data,axis=0)
-        if ppo_data.shape[0] > 1:
-            ppo_std = np.std(ppo_data,axis=0,ddof=1)
-            ppo_se = ppo_std / np.sqrt(ppo_data.shape[0])
+    if on_data is not None:
+        on_mean = np.mean(on_data,axis=0)
+        if on_data.shape[0] > 1:
+            on_std = np.std(on_data,axis=0,ddof=1)
+            on_se = on_std / np.sqrt(on_data.shape[0])
         else:
-            ppo_se = np.zeros_like(ppo_mean)
+            on_se = np.zeros_like(on_mean)
 
-        ax.plot(x/1e6,ppo_mean,color=ppo_color,label='PPO')
+        ax.plot(x/1e6,on_mean,color=on_color,label='On-Policy')
         ax.fill_between(x/1e6,
-            ppo_mean-se_val*ppo_se,ppo_mean+se_val*ppo_se,
-            alpha=0.2,color=ppo_color)
+            on_mean-se_val*on_se,on_mean+se_val*on_se,
+            alpha=0.2,color=on_color)
     
-    if geppo_data is not None:
-        geppo_mean = np.mean(geppo_data,axis=0)
-        if geppo_data.shape[0] > 1:
-            geppo_std = np.std(geppo_data,axis=0,ddof=1)
-            geppo_se = geppo_std / np.sqrt(geppo_data.shape[0])
+    if gpi_data is not None:
+        gpi_mean = np.mean(gpi_data,axis=0)
+        if gpi_data.shape[0] > 1:
+            gpi_std = np.std(gpi_data,axis=0,ddof=1)
+            gpi_se = gpi_std / np.sqrt(gpi_data.shape[0])
         else:
-            geppo_se = np.zeros_like(geppo_mean)
+            gpi_se = np.zeros_like(gpi_mean)
 
-        ax.plot(x/1e6,geppo_mean,color=geppo_color,label='GePPO')
+        ax.plot(x/1e6,gpi_mean,color=gpi_color,label='GPI')
         ax.fill_between(x/1e6,
-            geppo_mean-se_val*geppo_se,geppo_mean+se_val*geppo_se,
-            alpha=0.2,color=geppo_color)
+            gpi_mean-se_val*gpi_se,gpi_mean+se_val*gpi_se,
+            alpha=0.2,color=gpi_color)
 
     ax.set_xlabel('Steps (M)')
     ax.legend()

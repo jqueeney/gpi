@@ -1,7 +1,7 @@
 import tensorflow as tf
 
-from geppo.common.ac_utils import transform_features
-from geppo.common.ac_utils import create_nn
+from gpi.common.ac_utils import transform_features
+from gpi.common.ac_utils import create_nn
 
 class Critic:
     """Value function used for advantage function estimation."""

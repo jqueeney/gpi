@@ -1,6 +1,6 @@
 import numpy as np
 
-from geppo.common.runner_utils import aggregate_data, gae_all, reward_calc
+from gpi.common.runner_utils import aggregate_data, gae_all, reward_calc
 
 class Runner:
     """Class for running simulations and storing recent simulation data."""

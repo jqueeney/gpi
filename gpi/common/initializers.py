@@ -5,8 +5,8 @@ import random
 import os
 import gym
 
-from geppo.common.actor import GaussianActor, SoftMaxActor
-from geppo.common.critic import Critic
+from gpi.common.actor import GaussianActor, SoftMaxActor
+from gpi.common.critic import Critic
 
 def init_seeds(seed,env=None):
     """Sets random seed."""

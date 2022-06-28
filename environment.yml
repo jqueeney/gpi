@@ -1,4 +1,4 @@
-name: geppo
+name: gpi
 channels:
   - gurobi
   - http://conda.anaconda.org/gurobi

@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-from geppo.algs.base_alg import BaseAlg
+from gpi.algs.base_alg import BaseAlg
 
 class GePPO(BaseAlg):
     """Algorithm class for GePPO. PPO is a special case."""
@@ -9,17 +9,12 @@ class GePPO(BaseAlg):
     def __init__(self,seed,env,actor,critic,runner,ac_kwargs,
         idx,save_path,save_freq,checkpoint_file,keep_checkpoints):
         """Initializes GePPO class. See BaseAlg for details."""
-
         super(GePPO,self).__init__(seed,env,actor,critic,runner,ac_kwargs,
             idx,save_path,save_freq,checkpoint_file,keep_checkpoints)
 
-        self._ac_setup()
-
     def _ac_setup(self):
         """Sets up actor and critic kwargs as class attributes."""
-        self.critic_lr = self.ac_kwargs['critic_lr']        
-        self.critic_optimizer = tf.keras.optimizers.Adam(
-            learning_rate=self.critic_lr)
+        super(GePPO,self)._ac_setup()
 
         self.actor_lr = self.ac_kwargs['actor_lr']
         if self.ac_kwargs['scaleinitlr_dim']:
@@ -29,17 +24,7 @@ class GePPO(BaseAlg):
         self.actor_optimizer = tf.keras.optimizers.Adam(
             learning_rate=self.actor_lr)
 
-        self.update_it = self.ac_kwargs['update_it']
-        self.nminibatch = self.ac_kwargs['nminibatch']
         self.max_grad_norm = self.ac_kwargs['max_grad_norm']
-
-        self.adv_center = self.ac_kwargs['adv_center']
-        self.adv_scale = self.ac_kwargs['adv_scale']
-        self.adv_clip = self.ac_kwargs['adv_clip']
-        
-        self.eps_ppo = self.ac_kwargs['eps_ppo']
-        self.eps = self.eps_ppo * self.ac_kwargs['eps_mult']
-        self.eps_vary = self.ac_kwargs['eps_vary']
         
         self.adapt_lr = self.ac_kwargs['adapt_lr']
         self.adapt_factor = self.ac_kwargs['adapt_factor']

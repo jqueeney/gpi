@@ -10,12 +10,12 @@ import multiprocessing as mp
 import numpy as np
 import tensorflow as tf
 
-from geppo.common.cmd_utils import create_parser, gather_inputs, import_inputs
-from geppo.envs import init_env
-from geppo.algs import init_alg, gen_algs
-from geppo.common.initializers import init_seeds, init_actor, init_critic
-from geppo.common.optimize_weights import init_polweights
-from geppo.common.runner import Runner
+from gpi.common.cmd_utils import create_parser, gather_inputs, import_inputs
+from gpi.envs import init_env
+from gpi.algs import init_alg, gen_algs
+from gpi.common.initializers import init_seeds, init_actor, init_critic
+from gpi.common.optimize_weights import init_polweights
+from gpi.common.runner import Runner
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 for gpu in gpus:
