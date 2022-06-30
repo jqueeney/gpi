@@ -1,6 +1,6 @@
 # Generalized Policy Improvement (GPI) Algorithms
 
-This repository is the official implementation for the forthcoming paper Generalized Policy Improvement Algorithms with Theoretically Supported Sample Reuse, which introduces the reinforcement learning algorithm class known as Generalized Policy Improvement (GPI) algorithms. This extends the work done in the paper [Generalized Proximal Policy Optimization with Sample Reuse](https://proceedings.neurips.cc/paper/2021/hash/63c4b1baf3b4460fa9936b1a20919bec-Abstract.html), whose code was first published at [this repository](https://github.com/jqueeney/geppo).
+This repository is the official implementation for the paper [Generalized Policy Improvement Algorithms with Theoretically Supported Sample Reuse](https://arxiv.org/abs/2206.13714), which introduces the reinforcement learning algorithm class known as Generalized Policy Improvement (GPI) algorithms. This extends the work done in the paper [Generalized Proximal Policy Optimization with Sample Reuse](https://proceedings.neurips.cc/paper/2021/hash/63c4b1baf3b4460fa9936b1a20919bec-Abstract.html), whose code was first published at [this repository](https://github.com/jqueeney/geppo).
 
 GPI algorithms combine the approximate policy improvement benefits of on-policy methods with theoretically supported sample reuse. As a result, these algorithms provide practical guarantees on performance while making more efficient use of data than their on-policy counterparts. The GPI framework is theoretically supported by a Generalized Policy Improvement lower bound that can be approximated using data from all recent policies.
 
@@ -11,6 +11,27 @@ In this repository, we include on-policy and generalized versions of three popul
 3. VMPO and its generalized version GeVMPO
 
 Implementation of these algorithms follows the methodology described in the GPI paper, which in some cases differs from the implementation choices described in the original papers that introduced these on-policy algorithms.
+
+Please consider citing our papers as follows:
+
+```
+@misc{queeney_2022_gpi,
+ author = {Queeney, James and Paschalidis, Ioannis Ch. and Cassandras, Christos G.},
+ title = {Generalized Policy Improvement Algorithms with Theoretically Supported Sample Reuse},
+ howpublished = {{arXiv} preprint},
+ note = {{arXiv:2206.13714}},
+ year = {2022},
+}
+
+@inproceedings{queeney_2021_geppo,
+ author = {Queeney, James and Paschalidis, Ioannis Ch. and Cassandras, Christos G.},
+ title = {Generalized Proximal Policy Optimization with Sample Reuse},
+ booktitle = {Advances in Neural Information Processing Systems},
+ publisher = {Curran Associates, Inc.},
+ volume = {34},
+ year = {2021}
+}
+```
 
 ## Requirements
 
